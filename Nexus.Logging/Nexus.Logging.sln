@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nexus.Logging", "Nexus.Logging.csproj", "{BDBD807E-022E-4265-987B-9BC2703447CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nexus.Logging.Configuration", "..\Nexus.Logging.Configuration\Nexus.Logging.Configuration.csproj", "{ABFDD453-AF5F-46F9-925B-60A144894996}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nexus.Logging.Contract", "..\Nexus.Logging.Contract\Nexus.Logging.Contract.csproj", "{D64388A6-8980-4713-9C1E-6EEBBC691130}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nexus.Logging.Correlator", "..\Nexus.Logging.Correlator\Nexus.Logging.Correlator.csproj", "{875913F2-0C34-4B3F-8130-D4A54C6F947E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nexus.Logging.Correlator.Contract", "..\Nexus.Logging.Correlator.Contract\Nexus.Logging.Correlator.Contract.csproj", "{4DC8EC4F-29A7-4E33-B085-697192B2C74A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nexus.Logging.Serilog", "..\Nexus.Logging.Serilog\Nexus.Logging.Serilog.csproj", "{E801BA96-B1AF-42DB-BECF-CEAD119242B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDBD807E-022E-4265-987B-9BC2703447CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDBD807E-022E-4265-987B-9BC2703447CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDBD807E-022E-4265-987B-9BC2703447CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDBD807E-022E-4265-987B-9BC2703447CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABFDD453-AF5F-46F9-925B-60A144894996}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABFDD453-AF5F-46F9-925B-60A144894996}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABFDD453-AF5F-46F9-925B-60A144894996}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABFDD453-AF5F-46F9-925B-60A144894996}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D64388A6-8980-4713-9C1E-6EEBBC691130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D64388A6-8980-4713-9C1E-6EEBBC691130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D64388A6-8980-4713-9C1E-6EEBBC691130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D64388A6-8980-4713-9C1E-6EEBBC691130}.Release|Any CPU.Build.0 = Release|Any CPU
+		{875913F2-0C34-4B3F-8130-D4A54C6F947E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{875913F2-0C34-4B3F-8130-D4A54C6F947E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{875913F2-0C34-4B3F-8130-D4A54C6F947E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{875913F2-0C34-4B3F-8130-D4A54C6F947E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DC8EC4F-29A7-4E33-B085-697192B2C74A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DC8EC4F-29A7-4E33-B085-697192B2C74A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DC8EC4F-29A7-4E33-B085-697192B2C74A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DC8EC4F-29A7-4E33-B085-697192B2C74A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E801BA96-B1AF-42DB-BECF-CEAD119242B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E801BA96-B1AF-42DB-BECF-CEAD119242B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E801BA96-B1AF-42DB-BECF-CEAD119242B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E801BA96-B1AF-42DB-BECF-CEAD119242B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F5A9606-F40F-4614-999F-6DB24F8FDEAB}
+	EndGlobalSection
+EndGlobal

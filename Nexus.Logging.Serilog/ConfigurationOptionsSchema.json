@@ -1,0 +1,231 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "nexus-logging-serilog.json",
+  "type": "object",
+  "title": "AppSettings.json Logging Configuration",
+  "description": "Configuration options that are related to Nexus.Logging.Serilog",
+  "properties": {
+    "ApplicationName": {
+      "$id": "#/properties/ApplicationName",
+      "type": "string",
+      "title": "ApplicationName",
+      "description": "The name of the application that will be added to the log messages",
+      "examples": [
+        "{ReplaceWithAppName}"
+      ]
+    },
+    "AppSettings": {
+      "$id": "#/properties/AppSettings",
+      "type": "object",
+      "title": "AppSettings",
+      "description": "General AppSettings that can be used with the application",
+      "examples": [
+        {
+          "ApplicationName": "{ReplaceWithApplicationName}",
+          "ENV": "{ReplaceWithEnvironment}",
+          "LoggingEnvironmentName": "{ReplaceWithEnvironment}",
+          "Environment": "{ReplaceWithEnvironment}"
+        }
+      ],
+      "properties": {
+        "ApplicationName": {
+          "$id": "#/properties/AppSettings/properties/ApplicationName",
+          "type": "string",
+          "title": "ApplicationName",
+          "description": "The name of the application that will be added to the log messages",
+          "examples": [
+            "{ReplaceWithAppName}"
+          ]
+        }
+      },
+      "anyOf": [
+        {
+          "required": [ "ENV" ],
+          "properties": {
+            "ENV": {
+              "$id": "#/properties/AppSettings/properties/ENV",
+              "type": "string",
+              "title": "Environment",
+              "description": "The environment that the application is running in",
+              "examples": [
+                "Dev"
+              ]
+            }
+          }
+        },
+        {
+          "required": [ "LoggingEnvironmentName" ],
+          "properties": {
+            "LoggingEnvironmentName": {
+              "$id": "#/properties/AppSettings/properties/LoggingEnvironmentName",
+              "type": "string",
+              "title": "Environment",
+              "description": "The environment that the application is running in",
+              "examples": [
+                "Dev"
+              ]
+            }
+          }
+        },
+        {
+          "required": [ "Environment" ],
+          "properties": {
+            "Environment": {
+              "$id": "#/properties/AppSettings/properties/Environment",
+              "type": "string",
+              "title": "Environment",
+              "description": "The environment that the application is running in",
+              "examples": [
+                "Dev"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Logging": {
+      "$id": "#/properties/Logging",
+      "type": "object",
+      "title": "Logging Configuration",
+      "description": "Configuration options used to initialize logging",
+      "examples": [
+        {
+          "MinimumLevel": "Info",
+          "OutputTemplate": "$NexusJsonLogFormatter",
+          "Filters": {
+            "Microsoft": "Error",
+            "System": "Error"
+          },
+          "Targets": [
+            {
+              "Type": "Console",
+              "Provider": "Serilog"
+            },
+            {
+              "Type": "Debug",
+              "Provider": "Serilog"
+            },
+            {
+              "Provider": "Serilog",
+              "Type": "RollingFile",
+              "Args": {
+                "MinimumLevel": "Info",
+                "PathFormat": "C:\\Logs\\{ApplicationName}-{Environment}-{Date}.log",
+                "FileCount": "15",
+                "FileSize": "10000000",
+                "Buffered": false,
+                "Shared": false
+              }
+            }
+          ]
+        }
+      ],
+      "required": [
+        "MinimumLevel",
+        "OutputTemplate",
+        "Targets"
+      ],
+      "properties": {
+        "MinimumLevel": {
+          "$id": "#/properties/Logging/properties/MinimumLevel",
+          "type": "string",
+          "pattern": "^Debug|Info|Error|Warn|Fatal$",
+          "title": "MinimumLevel",
+          "description": "The minimum logging level that will be handled by the ILoggerProvider",
+          "examples": [
+            "Debug",
+            "Info",
+            "Error",
+            "Warn",
+            "Fatal"
+          ]
+        },
+        "Filters": {
+          "$id": "#/properties/Logging/properties/Filters",
+          "type": "object",
+          "title": "Filters",
+          "description": "Used to override the minimum level for specific namespaces",
+          "examples": [
+            {
+              "System": "Error",
+              "Microsoft": "Error"
+            }
+          ]
+        },
+        "OutputTemplate": {
+          "$id": "#/properties/Logging/properties/OutputTemplate",
+          "type": "string",
+          "title": "OutputTemplate",
+          "description": "Used to define the output template that should be used to format log messages",
+          "examples": [
+            "$NexusJsonLogFormatter",
+            "[{Timestamp:HH:mm:ss} {Level}] {Message:lj} {Properties:j}{NewLine}{Exception}"
+          ]
+        },
+        "Targets": {
+          "$id": "#/properties/Logging/properties/Targets",
+          "type": "array",
+          "title": "Targets",
+          "description": "Logging Targets that should be configured",
+          "items": {
+            "$id": "#/properties/Logging/properties/Targets/items",
+            "type": "object",
+            "title": "Target",
+            "description": "The configuration details for a specific logging target",
+            "examples": [
+              {
+                "Provider": "Serilog",
+                "Type": "RollingFile",
+                "Args": {
+                  "Path": "C:\\Test\\Path\\Magic",
+                  "FileCount": "15"
+                }
+              }
+            ],
+            "required": [
+              "Provider",
+              "Type"
+            ],
+            "properties": {
+              "Provider": {
+                "$id": "#/properties/Logging/properties/Targets/items/properties/Provider",
+                "type": "string",
+                "title": "Provider",
+                "description": "The provider to use for the target",
+                "examples": [
+                  "Serilog"
+                ]
+              },
+              "Type": {
+                "$id": "#/properties/Logging/properties/Targets/items/properties/Type",
+                "title": "Target Type",
+                "description": "The type of target that is being configured",
+                "type": "string",
+                "pattern": "^Console|Debug|RollingFile|Service$",
+                "examples": [
+                  "Console",
+                  "Debug",
+                  "RollingFile",
+                  "Service"
+                ]
+              },
+              "Args": {
+                "$id": "#/properties/Logging/properties/Targets/items/properties/Args",
+                "type": "object",
+                "title": "Target Arguments",
+                "description": "Arguments to use to configure the logging target",
+                "examples": [
+                  "MinimumLevel",
+                  "PathFormat",
+                  "FileCount",
+                  "Using",
+                  "Name"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

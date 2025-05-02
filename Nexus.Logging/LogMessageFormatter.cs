@@ -1,0 +1,114 @@
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Text.Json;
+using System;
+using System.Runtime.CompilerServices;
+using System.Reflection;
+
+namespace Nexus.Logging
+{
+    internal class LogMessageFormatter
+    {
+        /// <summary>
+        /// Types that will be serialized using their respective ToString implementation.
+        /// </summary>
+        private static readonly HashSet<Type> _scalarTypes = new HashSet<Type>
+        {
+            typeof(bool),
+            typeof(char),
+            typeof(byte), typeof(short), typeof(ushort), typeof(int), typeof(uint),
+            typeof(long), typeof(ulong), typeof(float), typeof(double), typeof(decimal),
+            typeof(string),
+            typeof(DateTime), typeof(DateTimeOffset), typeof(TimeSpan),
+            typeof(Guid), typeof(Uri)
+        };
+
+        private static readonly Regex _pattern = new Regex(@"{(.+?)}", RegexOptions.Compiled);
+        private const string NullValue = "(null)";
+
+        internal string MessageTemplate { get; }
+
+        internal string[] TemplateKeys { get; }
+
+        public LogMessageFormatter(string messageTemplate)
+        {
+            MessageTemplate = messageTemplate;
+            TemplateKeys = ExtractKeys(messageTemplate);
+        }
+
+        /// <summary>
+        /// Finds all the parameters within the message template that have a named {key} pattern.
+        /// </summary>
+        /// <param name="messageTemplate"></param>
+        /// <returns></returns>
+        private string[] ExtractKeys(string messageTemplate)
+        {
+            var matches = _pattern.Matches(messageTemplate);
+            string[] keys = new string[matches.Count];
+            for (int i = 0; i < matches.Count; i++)
+            {
+                keys[i] = matches[i].Groups[1].Value;
+            }
+            return keys;
+        }
+
+        /// <summary>
+        /// Replaces the message template keys with the <param name="values">values</param> provided.
+        /// <para>Key matches are case sensitive.</para>
+        /// </summary>
+        /// <param name="values">Key, Value to replace in the message template.</param>
+        /// <returns></returns>
+        internal string Format(IDictionary<string, object> values)
+        {
+            if (TemplateKeys.Length == 0 || values == null || values.Count == 0) return MessageTemplate;
+            string formatted = MessageTemplate;
+            foreach (var t in TemplateKeys)
+            {
+                string value = values.ContainsKey(t) ? FormatObjectValue(values[t]) : NullValue;
+                formatted = formatted.Replace("{" + t + "}", value);
+            }
+            return formatted;
+        }
+
+        /// <summary>
+        /// Format the <paramref name="value"/> based on the underlying type.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private string FormatObjectValue(object value)
+        {
+            if (value == null)
+            {
+                return NullValue;
+            }
+
+            var type = value.GetType();
+
+            if (_scalarTypes.Contains(type))
+            {
+                return value.ToString();
+            }
+
+            // Always serialize anonymous types as Json as their ToString representation has odd formatting
+            if (IsAnonymousType(type))
+            {
+                return JsonSerializer.Serialize(value);
+            }
+
+            // Default serialization using ToString if it is overriden in the Type, otherwise serialize as Json
+            return type.ToString() != value.ToString() ? value.ToString() : JsonSerializer.Serialize(value);
+        }
+
+        private static bool IsAnonymousType(Type type)
+        {
+            return type == null
+                ? throw new ArgumentNullException("type")
+                :
+                // HACK: The only way to detect anonymous types right now.
+                Attribute.IsDefined(type, typeof(CompilerGeneratedAttribute), false)
+                && type.IsGenericType && type.Name.Contains("AnonymousType")
+                && (type.Name.StartsWith("<>") || type.Name.StartsWith("VB$"))
+                && type.Attributes.HasFlag(TypeAttributes.NotPublic);
+        }
+    }
+}
