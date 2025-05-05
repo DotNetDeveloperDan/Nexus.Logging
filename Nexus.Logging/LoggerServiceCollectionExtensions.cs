@@ -1,7 +1,6 @@
 ﻿
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using Nexus.Logging.Configuration;
 using Nexus.Logging.Contract;
 
@@ -24,12 +23,12 @@ namespace Nexus.Logging
         public static IServiceCollection AddNexusLogger(this IServiceCollection services, IConfiguration configuration, Action<ILoggerBuilder> configureBuilder)
         {
             services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
-            
+
             var loggerBuilder = services.ConfigureLogging(configuration);
             configureBuilder(loggerBuilder);
-            
+
             services.AddSingleton(provider => new ApplicationScope(provider.GetRequiredService<ApplicationScopeOptions>()));
-            
+
             return loggerBuilder.Build();
         }
 

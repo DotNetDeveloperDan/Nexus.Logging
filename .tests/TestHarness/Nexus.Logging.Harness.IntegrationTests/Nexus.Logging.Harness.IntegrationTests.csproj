@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+
+    <Version>6.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="9.0.4" />
+    <PackageReference Include="nunit" Version="4.3.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageReference Include="System.Text.Json" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nexus.Logging.Harness.Service1\Nexus.Logging.Harness.Service1.csproj" />
+    <ProjectReference Include="..\Nexus.Logging.Harness.Service2\Nexus.Logging.Harness.Service2.csproj" />
+    <ProjectReference Include="..\Nexus.Logging.Harness.Service3\Nexus.Logging.Harness.Service3.csproj" />
+    <ProjectReference Include="..\Nexus.Logging.Harness.ServiceNoCorrelator\Nexus.Logging.Harness.ServiceNoCorrelator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.testharness.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

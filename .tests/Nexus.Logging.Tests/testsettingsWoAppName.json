@@ -1,0 +1,19 @@
+﻿{
+  "AppSettings": {
+    "ENV": "UnitTests"
+  },
+  "Logging": {
+    "MinimumLevel": "Debug",
+    "Filters": {
+      "Microsoft": "Error",
+      "System": "Info"
+    },
+    "OutputTemplate": "MainTemplateProp",
+    "Targets": [
+      {
+        "Provider": "InMemory",
+        "Type": "Debug"
+      }
+    ]
+  }
+}

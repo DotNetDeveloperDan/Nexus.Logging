@@ -1,0 +1,24 @@
+﻿{
+  "ApplicationName": "ProgLeasing.System.Logging.Serilog.Tests",
+  "AppSettings": {
+    "Environment": "UnitTests"
+  },
+  "Logging": {
+    "MinimumLevel": "Info",
+    "Filters": {
+      "Microsoft": "Error",
+      "System": "Error"
+    },
+    "OutputTemplate": "$ProgJsonLogFormatter",
+    "Targets": [
+      {
+        "Provider": "Serilog",
+        "Type": "Service",
+        "Args": {
+          "Using": "ProgLeasing.System.Logging.Serilog.FileSimulatorSink",
+          "Name": "FileSimulator"
+        }
+      }
+    ]
+  }
+}

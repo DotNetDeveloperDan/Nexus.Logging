@@ -1,9 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Nexus.Logging.Configuration;
 using Serilog;
 using Serilog.Formatting;
 using Serilog.Formatting.Display;
+using System.Diagnostics.CodeAnalysis;
 using LogLevel = Nexus.Logging.Contract.LogLevel;
 
 namespace Nexus.Logging.Serilog;
@@ -58,7 +58,7 @@ public class SerilogConfigureLoggerProvider : IConfigureLoggerProvider
     /// </summary>
     /// <param name="outputTemplate"></param>
     /// <returns></returns>
-    internal ITextFormatter GetOutputFormatter(string outputTemplate)
+    public ITextFormatter GetOutputFormatter(string outputTemplate)
     {
         if (string.IsNullOrWhiteSpace(outputTemplate)) outputTemplate = NexusJsonLogFormatter;
 

@@ -1,17 +1,17 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Nexus.Logging.Configuration;
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Formatting;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Nexus.Logging.Serilog;
 
 /// <summary>
 ///     Dynamic configuration for additional Serilog Sinks.
 /// </summary>
-internal static class ServiceTargetSinkConfiguration
+public static class ServiceTargetSinkConfiguration
 {
     /// <summary>
     ///     Dynamically loads and registers a <see cref="LoggerTarget.Service" /> from the Sinks library based on
@@ -26,7 +26,7 @@ internal static class ServiceTargetSinkConfiguration
     /// <param name="receiver">
     ///     <see cref="LoggerConfiguration.WriteTo" />
     /// </param>
-    internal static void Register(LoggerTargetOptions targetOptions, ITextFormatter formatter, object receiver)
+    public static void Register(LoggerTargetOptions targetOptions, ITextFormatter formatter, object receiver)
     {
         var sink = LoadSink(targetOptions);
         var sinkConfigMethods = FindSinkConfigurationMethods(sink.Assembly);
@@ -42,13 +42,13 @@ internal static class ServiceTargetSinkConfiguration
         if (selectedMethod != null)
         {
             var call = (from p in selectedMethod.GetParameters().Skip(1)
-                    let arg = targetArgs.FirstOrDefault(s => s.Key.Equals(p.Name, StringComparison.OrdinalIgnoreCase))
-                    select arg.Key == null
-                        ? p.HasDefaultValue
-                            ? p.DefaultValue
-                            : throw new LoggerConfigurationException(
-                                $"Target Args missing parameter: '{p.Name}' for Name: '{sink.Name}'")
-                        : arg.Value)
+                        let arg = targetArgs.FirstOrDefault(s => s.Key.Equals(p.Name, StringComparison.OrdinalIgnoreCase))
+                        select arg.Key == null
+                            ? p.HasDefaultValue
+                                ? p.DefaultValue
+                                : throw new LoggerConfigurationException(
+                                    $"Target Args missing parameter: '{p.Name}' for Name: '{sink.Name}'")
+                            : arg.Value)
                 .ToList();
 
             call.Insert(0, receiver);

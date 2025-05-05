@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Nexus.Logging
+﻿namespace Nexus.Logging
 {
     /// <summary>
     /// Generic logger implementation that wraps 

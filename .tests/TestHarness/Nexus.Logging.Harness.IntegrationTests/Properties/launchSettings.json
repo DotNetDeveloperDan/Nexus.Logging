@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "ProgLeasing.System.Logging.TestHarness.IntegrationTests": {
+      "commandName": "Project"
+    }
+  }
+}

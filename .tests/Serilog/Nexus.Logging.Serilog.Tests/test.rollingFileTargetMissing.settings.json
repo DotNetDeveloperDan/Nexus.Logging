@@ -1,0 +1,23 @@
+﻿{
+  "ApplicationName": "ProgLeasing.System.Logging.Serilog.Tests",
+  "AppSettings": {
+    "Environment": "UnitTests"
+  },
+  "Logging": {
+    "MinimumLevel": "Info",
+    "Filters": {
+      "Microsoft": "Error",
+      "System": "Error"
+    },
+    "OutputTemplate": "$ProgJsonLogFormatter",
+    "Targets": [
+      {
+        "Provider": "Serilog",
+        "Type": "RollingFile",
+        "Args": {
+          "FileCount": "2"
+        }
+      }
+    ]
+  }
+}

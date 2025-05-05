@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using System.Text.Json;
-using System;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Reflection;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace Nexus.Logging
 {
-    internal class LogMessageFormatter
+    public class LogMessageFormatter
     {
         /// <summary>
         /// Types that will be serialized using their respective ToString implementation.
@@ -26,9 +24,9 @@ namespace Nexus.Logging
         private static readonly Regex _pattern = new Regex(@"{(.+?)}", RegexOptions.Compiled);
         private const string NullValue = "(null)";
 
-        internal string MessageTemplate { get; }
+        public string MessageTemplate { get; }
 
-        internal string[] TemplateKeys { get; }
+        public string[] TemplateKeys { get; }
 
         public LogMessageFormatter(string messageTemplate)
         {
@@ -58,7 +56,7 @@ namespace Nexus.Logging
         /// </summary>
         /// <param name="values">Key, Value to replace in the message template.</param>
         /// <returns></returns>
-        internal string Format(IDictionary<string, object> values)
+        public string Format(IDictionary<string, object> values)
         {
             if (TemplateKeys.Length == 0 || values == null || values.Count == 0) return MessageTemplate;
             string formatted = MessageTemplate;

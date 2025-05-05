@@ -1,0 +1,37 @@
+﻿{
+  "ApplicationName": "ProgLeasing.System.Logging.Configuration.Tests123",
+  "AppSettings": {
+    "ENV": "UnitTests"
+  },
+  "Logging": {
+    "MinimumLevel": "Warn",
+    "Filters": {
+      "Microsoft": "Error",
+      "System": "Info"
+    },
+    "OutputTemplate": "MainTemplateProp",
+    "Targets": [
+      {
+        "Provider": "Microsoft.Extensions.Logging",
+        "Type": "Console",
+        "Args": {
+          "ImAKeyExample": "ImAValueForAKey"
+        },
+        "OutputTemplate": "TestingOverrideForTemplate"
+      },
+      {
+        "Provider": "Microsoft.Extensions.Logging",
+        "Type": "Debug"
+      },
+      {
+        "Provider": "Serilog",
+        "Type": "RollingFile",
+        "Args": {
+          "PathFormat": "C:\\Test\\Path\\Magic.log",
+          "FileCount": "15",
+          "FileSize": "10"
+        }
+      }
+    ]
+  }
+}

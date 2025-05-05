@@ -5,7 +5,7 @@ namespace Nexus.Logging;
 /// <summary>
 ///     Optimization to preserve message template key extraction.
 /// </summary>
-internal struct FormattedLogMessage
+public struct FormattedLogMessage
 {
     private const string NullMessage = "[null]";
 
@@ -19,12 +19,12 @@ internal struct FormattedLogMessage
     /// <summary>
     ///     Count of the cached template items.
     /// </summary>
-    internal int Count => _count;
+    public int Count => _count;
 
     /// <summary>
     ///     Formatter for the current message template.
     /// </summary>
-    internal LogMessageFormatter Formatter => _formatter;
+    public LogMessageFormatter Formatter => _formatter;
 
     /// <summary>
     ///     Get or add the formatter associated with the FormattedLogMessage.
