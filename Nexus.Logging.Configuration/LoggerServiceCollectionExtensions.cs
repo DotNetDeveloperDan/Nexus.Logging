@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Reflection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace Nexus.Logging.Configuration;
 
@@ -14,8 +14,7 @@ public static class LoggerServiceCollectionExtensions
     /// <returns></returns>
     public static ILoggerBuilder ConfigureLogging(this IServiceCollection services, IConfiguration configuration)
     {
-        var loggerOptions = configuration.GetSection("Logging").Get<LoggerOptions>();
-        if (loggerOptions == null) loggerOptions = new LoggerOptions();
+        var loggerOptions = configuration.GetSection("Logging").Get<LoggerOptions>() ?? new LoggerOptions();
 
         var appScopeOptions = new ApplicationScopeOptions
         {
