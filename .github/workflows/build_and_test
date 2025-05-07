@@ -1,0 +1,34 @@
+name: .NET CI
+
+# Trigger on push to main (you can also add pull_request if you like)
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out your repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Install the .NET SDK
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'     # change to match your target SDK
+
+      # 3. Restore NuGet packages
+      - name: Restore dependencies
+        run: dotnet restore YourSolution.sln
+
+      # 4. Build the solution
+      - name: Build
+        run: dotnet build Nexus.Logging.sln --configuration Release --no-restore
+
+      # 5. Run all tests
+      - name: Test
+        run: dotnet test YourSolution.sln --no-build --verbosity normal
