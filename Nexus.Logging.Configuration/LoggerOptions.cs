@@ -1,6 +1,4 @@
-﻿
-
-using Nexus.Logging.Contract;
+﻿using Nexus.Logging.Contract;
 
 namespace Nexus.Logging.Configuration;
 

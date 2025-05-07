@@ -9,10 +9,7 @@ public class CorrelationContextAccessor : ICorrelationContextAccessor
 
     public ICorrelationContext CurrentContext
     {
-        get
-        {
-            return CorrelationContext.Value ?? null;
-        }
+        get => CorrelationContext.Value ?? null;
         set => CorrelationContext.Value = value;
     }
 

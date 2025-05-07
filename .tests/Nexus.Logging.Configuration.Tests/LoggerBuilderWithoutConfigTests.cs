@@ -2,25 +2,23 @@
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
-namespace Nexus.Logging.Configuration.Tests
+namespace Nexus.Logging.Configuration.Tests;
+
+public class LoggerBuilderWithoutConfigTests
 {
-    public class LoggerBuilderWithoutConfigTests
+    private IConfiguration _configuration;
+
+    [SetUp]
+    public void Init()
     {
-        private IConfiguration _configuration;
+        _configuration = new ConfigurationBuilder()
+            .Build();
+    }
 
-        [SetUp]
-        public void Init()
-        {
-            _configuration = new ConfigurationBuilder()
-                .Build();
-        }
-
-        [Test]
-        public void When_ConfigureLoggingWithoutRegisteringProviderThenBuild_Should_ThrowLoggerConfigurationException()
-        {
-            var services = new ServiceCollection();
-            var ex = Assert.Throws<LoggerConfigurationException>(() => services.ConfigureLogging(_configuration).Build());
-        }
-
+    [Test]
+    public void When_ConfigureLoggingWithoutRegisteringProviderThenBuild_Should_ThrowLoggerConfigurationException()
+    {
+        var services = new ServiceCollection();
+        var ex = Assert.Throws<LoggerConfigurationException>(() => services.ConfigureLogging(_configuration).Build());
     }
 }

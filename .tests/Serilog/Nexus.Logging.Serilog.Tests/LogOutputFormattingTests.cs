@@ -35,7 +35,7 @@ public class LogOutputFormattingTests
         var line1 = reader.ReadLine();
         var line2 = reader.ReadLine();
 
-        Assert.That(line1.Contains(message1),Is.True);
+        Assert.That(line1.Contains(message1), Is.True);
         Assert.That(line2.Contains(message2), Is.True);
     }
 }

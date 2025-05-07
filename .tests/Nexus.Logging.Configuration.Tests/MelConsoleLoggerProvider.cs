@@ -1,37 +1,28 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
-namespace Nexus.Logging.Configuration.Tests
+namespace Nexus.Logging.Configuration.Tests;
+
+/// <summary>
+///     Test provider configuration
+/// </summary>
+public class MelConsoleLoggerProvider : IConfigureLoggerProvider
 {
-    /// <summary>
-    /// Test provider configuration
-    /// </summary>
-    public class MelConsoleLoggerProvider : IConfigureLoggerProvider
+    public string ProviderName => "Microsoft.Extensions.Logging";
+
+    public void Configure(ILoggingBuilder builder, LoggerOptions options,
+        ApplicationScopeOptions applicationScopeOptions)
     {
-        public string ProviderName => "Microsoft.Extensions.Logging";
+        foreach (var filter in options.Filters)
+            builder.AddFilter(filter.Key, filter.Value.GetValueOrDefault().ConvertLogLevel());
 
-        public void Configure(ILoggingBuilder builder, LoggerOptions options, ApplicationScopeOptions applicationScopeOptions)
+        foreach (var target in options.Targets.Where(w =>
+                     w.Provider.Equals(ProviderName, StringComparison.InvariantCultureIgnoreCase)))
         {
-            foreach (var filter in options.Filters)
-            {
-                builder.AddFilter(filter.Key, filter.Value.GetValueOrDefault().ConvertLogLevel());
-            }
+            if (target.Type == LoggerTarget.Debug) builder.AddDebug();
 
-            foreach (var target in options.Targets.Where(w => w.Provider.Equals(ProviderName, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                if (target.Type == LoggerTarget.Debug)
-                {
-                    builder.AddDebug();
-                }
-
-                if (target.Type == LoggerTarget.Console)
-                {
-                    builder.AddConsole(opt => opt.IncludeScopes = true);
-                }
-            }
-
-
+            if (target.Type == LoggerTarget.Console) builder.AddConsole(opt => opt.IncludeScopes = true);
         }
     }
 }

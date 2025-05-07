@@ -1,38 +1,34 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
+using Microsoft.Extensions.Logging;
 
-namespace Nexus.Logging.Tests
+namespace Nexus.Logging.Tests;
+
+public sealed class InMemoryLogProvider : ILoggerProvider, ISupportExternalScope
 {
-    public sealed class InMemoryLogProvider : ILoggerProvider, ISupportExternalScope
+    private readonly ConcurrentDictionary<string, InMemoryLogger> _loggers = new();
+
+    private IExternalScopeProvider _scopeProvider;
+
+    public ILogger CreateLogger(string categoryName)
     {
-        private readonly ConcurrentDictionary<string, InMemoryLogger> _loggers = new ConcurrentDictionary<string, InMemoryLogger>();
+        return _loggers.GetOrAdd(categoryName, CreateLoggerImplementation);
+    }
 
-        private IExternalScopeProvider _scopeProvider;
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
 
-        public ILogger CreateLogger(string categoryName)
-        {
-            return _loggers.GetOrAdd(categoryName, CreateLoggerImplementation);
-        }
+    public void SetScopeProvider(IExternalScopeProvider scopeProvider)
+    {
+        _scopeProvider = scopeProvider;
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        foreach (var logger in _loggers) logger.Value.ScopeProvider = _scopeProvider;
+    }
 
-        private InMemoryLogger CreateLoggerImplementation(string categoryName)
-        {
-            return new InMemoryLogger() { ScopeProvider = _scopeProvider };
-        }
-
-        public void SetScopeProvider(IExternalScopeProvider scopeProvider)
-        {
-            _scopeProvider = scopeProvider;
-
-            foreach (var logger in _loggers)
-            {
-                logger.Value.ScopeProvider = _scopeProvider;
-            }
-        }
+    private InMemoryLogger CreateLoggerImplementation(string categoryName)
+    {
+        return new InMemoryLogger { ScopeProvider = _scopeProvider };
     }
 }

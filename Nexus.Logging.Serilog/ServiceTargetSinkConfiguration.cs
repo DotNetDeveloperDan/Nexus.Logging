@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Configuration;
 using Nexus.Logging.Configuration;
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Formatting;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 
 namespace Nexus.Logging.Serilog;
 
@@ -42,13 +42,13 @@ public static class ServiceTargetSinkConfiguration
         if (selectedMethod != null)
         {
             var call = (from p in selectedMethod.GetParameters().Skip(1)
-                        let arg = targetArgs.FirstOrDefault(s => s.Key.Equals(p.Name, StringComparison.OrdinalIgnoreCase))
-                        select arg.Key == null
-                            ? p.HasDefaultValue
-                                ? p.DefaultValue
-                                : throw new LoggerConfigurationException(
-                                    $"Target Args missing parameter: '{p.Name}' for Name: '{sink.Name}'")
-                            : arg.Value)
+                    let arg = targetArgs.FirstOrDefault(s => s.Key.Equals(p.Name, StringComparison.OrdinalIgnoreCase))
+                    select arg.Key == null
+                        ? p.HasDefaultValue
+                            ? p.DefaultValue
+                            : throw new LoggerConfigurationException(
+                                $"Target Args missing parameter: '{p.Name}' for Name: '{sink.Name}'")
+                        : arg.Value)
                 .ToList();
 
             call.Insert(0, receiver);

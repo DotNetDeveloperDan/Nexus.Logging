@@ -28,9 +28,7 @@ public class LoggerBuilder(
     {
         // If no IConfigureLoggerProvider registrations have been setup then find any that are referenced
         if (LoggerProviders.Count == 0)
-        {
             throw new LoggerConfigurationException("No IConfigureLoggerProvider registrations have been added.");
-        }
         // Setup logging through the Microsoft.Extensions.Logging pipeline
         Services.AddLogging(builder =>
         {
@@ -39,9 +37,7 @@ public class LoggerBuilder(
             builder.SetMinimumLevel(LoggerOptions.MinimumLevel.GetValueOrDefault().ConvertLogLevel());
             // Configure each registered provider
             foreach (var loggerProvider in LoggerProviders)
-            {
                 loggerProvider.Configure(builder, LoggerOptions, ApplicationScopeOptions);
-            }
         });
         return Services;
     }

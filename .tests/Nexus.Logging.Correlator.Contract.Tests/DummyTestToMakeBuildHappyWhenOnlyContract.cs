@@ -1,28 +1,26 @@
-using NUnit.Framework;
 using System;
+using NUnit.Framework;
 
-namespace Nexus.Logging.Correlator.Contract.Tests
+namespace Nexus.Logging.Correlator.Contract.Tests;
+
+public class DummyTestToMakeBuildHappyWhenOnlyContract
 {
-    public class DummyTestToMakeBuildHappyWhenOnlyContract
+    [Test]
+    public void TestStuff()
     {
-        [Test]
-        public void TestStuff()
-        {
-            var test = new FakeContext();
-            Assert.That(test, Is.Not.Null);
-        }
-
+        var test = new FakeContext();
+        Assert.That(test, Is.Not.Null);
     }
+}
 
-    public class FakeContext : ICorrelationContext
+public class FakeContext : ICorrelationContext
+{
+    public string CorrelationId { get; } = Guid.NewGuid().ToString();
+    public int Sequence { get; }
+    public string ParentCorrelationId { get; }
+    public string StackId { get; }
+
+    public void IncrementSequence()
     {
-        public string CorrelationId { get; } = Guid.NewGuid().ToString();
-        public int Sequence { get; }
-        public string ParentCorrelationId { get; }
-        public string StackId { get; }
-        public void IncrementSequence()
-        {
-
-        }
     }
 }

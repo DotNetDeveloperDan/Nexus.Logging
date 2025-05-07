@@ -1,14 +1,13 @@
-﻿namespace Nexus.Logging.Contract
+﻿namespace Nexus.Logging.Contract;
+
+/// <summary>
+///     Supported logging levels.
+/// </summary>
+public enum LogLevel
 {
-    /// <summary>
-    /// Supported logging levels.
-    /// </summary>
-    public enum LogLevel
-    {
-        Info,
-        Debug,
-        Warn,
-        Error,
-        Fatal
-    }
+    Info,
+    Debug,
+    Warn,
+    Error,
+    Fatal
 }

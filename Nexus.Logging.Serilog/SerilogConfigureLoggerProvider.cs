@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Logging;
 using Nexus.Logging.Configuration;
 using Serilog;
 using Serilog.Formatting;
 using Serilog.Formatting.Display;
-using System.Diagnostics.CodeAnalysis;
 using LogLevel = Nexus.Logging.Contract.LogLevel;
 
 namespace Nexus.Logging.Serilog;
