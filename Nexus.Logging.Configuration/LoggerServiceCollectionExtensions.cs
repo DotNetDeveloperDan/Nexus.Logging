@@ -30,6 +30,7 @@ public static class LoggerServiceCollectionExtensions
                           ?? throw new LoggerConfigurationException("Environment must be defined to configure logging.")
         };
 
+        services.Configure<LoggerOptions>(options => configuration.GetSection("Logging").Bind(options));
         services.AddSingleton(appScopeOptions);
         services.AddSingleton(loggerOptions);
         return new LoggerBuilder(services, loggerOptions, appScopeOptions);

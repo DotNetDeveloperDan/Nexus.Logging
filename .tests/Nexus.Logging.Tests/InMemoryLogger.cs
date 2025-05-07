@@ -6,7 +6,7 @@ using System.Text;
 namespace Nexus.Logging.Tests
 {
     /// <summary>
-    /// Provides an in memory logger implementation to show pipeline interactions and enable unit testing of the ProgLeasing.System.Logging components.
+    /// Provides an in memory logger implementation to show pipeline interactions and enable unit testing of the Nexus.Logging components.
     /// This is an example of how the Microsoft.Extensions.Logging pipeline works when dealing with scoping from IExternalScopeProvider.
     /// Also shows how the ILoggerFactory -> ILoggerProvider setup the ILogger.
     /// </summary>

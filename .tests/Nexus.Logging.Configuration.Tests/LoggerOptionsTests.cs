@@ -1,9 +1,9 @@
-﻿using System.Linq;
+﻿
+using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Nexus.Logging.Contract;
-using Nexus.Logging.Configuration; // assuming this is where ConfigureLogging lives
 using NUnit.Framework;
 
 namespace Nexus.Logging.Configuration.Tests
@@ -35,7 +35,7 @@ namespace Nexus.Logging.Configuration.Tests
             Assert.That(options.Filters.Count, Is.EqualTo(2));
             Assert.That(options.Targets.Count, Is.EqualTo(3));
             Assert.That(options.MinimumLevel.HasValue, Is.True);
-            Assert.That(options.MinimumLevel.Value, Is.EqualTo(LogLevel.Warn));
+            Assert.That(options.MinimumLevel.GetValueOrDefault(), Is.EqualTo(LogLevel.Warn));
         }
 
         [Test]

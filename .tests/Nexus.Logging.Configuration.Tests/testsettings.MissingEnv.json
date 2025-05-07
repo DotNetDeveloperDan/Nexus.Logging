@@ -1,5 +1,5 @@
 ﻿{
-  "ApplicationName": "ProgLeasing.System.Logging.Configuration.Tests",
+  "ApplicationName": "Nexus.Logging.Configuration.Tests",
   "Logging": {
     "MinimumLevel": "Warn",
     "Filters": {

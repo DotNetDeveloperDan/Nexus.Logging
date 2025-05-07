@@ -38,10 +38,10 @@ namespace Nexus.Logging.Harness.IntegrationTests
 
             // Retrieve logs
             _logs = GetAllServiceLogs();
-            _service1Logs = _logs[$"ProgLeasingSystemLoggingHarnessService1-{_logSuffix}"];
-            _service2Logs = _logs[$"ProgLeasingSystemLoggingHarnessService2-{_logSuffix}"];
-            _service3Logs = _logs[$"ProgLeasingSystemLoggingHarnessService3-{_logSuffix}"];
-            _serviceNoCorrelatorLogs = _logs[$"ProgLeasingSystemLoggingHarnessServiceNoCorrelator-{_logSuffix}"];
+            _service1Logs = _logs[$"NexusLoggingHarnessService1-{_logSuffix}"];
+            _service2Logs = _logs[$"NexusLoggingHarnessService2-{_logSuffix}"];
+            _service3Logs = _logs[$"NexusLoggingHarnessService3-{_logSuffix}"];
+            _serviceNoCorrelatorLogs = _logs[$"NexusLoggingHarnessServiceNoCorrelator-{_logSuffix}"];
 
             _service1CorrelationContexts = _service1Logs.Select(CreateCorrelationContext).ToList();
             _service2CorrelationContexts = _service2Logs.Select(CreateCorrelationContext).ToList();
@@ -125,15 +125,7 @@ namespace Nexus.Logging.Harness.IntegrationTests
 
         private Dictionary<string, IEnumerable<string>> GetAllServiceLogs()
         {
-            var logs = new Dictionary<string, IEnumerable<string>>();
-            foreach (var filePath in Directory.EnumerateFiles(
-                         Utilities.GetSolutionDirectory(),
-                         $"*{_logSuffix}",
-                         SearchOption.AllDirectories))
-            {
-                logs.Add(Path.GetFileName(filePath), ReadLines(filePath));
-            }
-            return logs;
+            return Directory.EnumerateFiles(Utilities.GetSolutionDirectory(), $"*{_logSuffix}", SearchOption.AllDirectories).ToDictionary(filePath => Path.GetFileName(filePath), filePath => ReadLines(filePath));
         }
 
         private CorrelationContext CreateCorrelationContext(string logEntry)

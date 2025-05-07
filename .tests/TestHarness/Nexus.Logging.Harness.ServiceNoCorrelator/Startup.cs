@@ -27,7 +27,7 @@ namespace Nexus.Logging.Harness.ServiceNoCorrelator
                 httpClient =>
                 {
                     httpClient.BaseAddress =
-                        new Uri("https://progleasing.system.logging.testharness.service3");
+                        new Uri("https://Nexus.logging.testharness.service3");
                 });
         }
 

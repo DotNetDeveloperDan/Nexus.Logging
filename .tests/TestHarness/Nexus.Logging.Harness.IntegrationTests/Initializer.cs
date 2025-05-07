@@ -31,7 +31,7 @@ namespace Nexus.Logging.Harness.IntegrationTests
         /// <returns></returns>
         public static HttpMessageHandler InitService3()
         {
-            var appsettingsPath = Path.Combine(BaseDirectory, "ProgLeasing.System.Logging.Harness.Service3/appsettings.json");
+            var appsettingsPath = Path.Combine(BaseDirectory, "Nexus.Logging.Harness.Service3/appsettings.json");
 
             var config = new ConfigurationBuilder()
                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -54,7 +54,7 @@ namespace Nexus.Logging.Harness.IntegrationTests
         /// <returns></returns>
         public static HttpMessageHandler InitServiceNoCorrelator(HttpMessageHandler chainableHandler)
         {
-            var appsettingsPath = Path.Combine(BaseDirectory, "ProgLeasing.System.Logging.Harness.ServiceNoCorrelator/appsettings.json");
+            var appsettingsPath = Path.Combine(BaseDirectory, "Nexus.Logging.Harness.ServiceNoCorrelator/appsettings.json");
 
             var config = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -83,7 +83,7 @@ namespace Nexus.Logging.Harness.IntegrationTests
         /// <returns></returns>
         public static HttpMessageHandler InitService2(HttpMessageHandler chainableHandler)
         {
-            var appsettingsPath = Path.Combine(BaseDirectory, "ProgLeasing.System.Logging.Harness.Service2/appsettings.json");
+            var appsettingsPath = Path.Combine(BaseDirectory, "Nexus.Logging.Harness.Service2/appsettings.json");
 
             var config = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -112,7 +112,7 @@ namespace Nexus.Logging.Harness.IntegrationTests
         /// <returns></returns>
         public static HttpClient InitTestHarness(HttpMessageHandler secondServiceHandler, HttpMessageHandler noCorrelatorHandler)
         {
-            var appsettingsPath = Path.Combine(BaseDirectory, "ProgLeasing.System.Logging.Harness.Service1/appsettings.json");
+            var appsettingsPath = Path.Combine(BaseDirectory, "Nexus.Logging.Harness.Service1/appsettings.json");
 
             var config = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)

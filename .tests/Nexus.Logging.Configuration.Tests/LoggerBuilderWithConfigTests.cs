@@ -24,7 +24,7 @@ namespace Nexus.Logging.Configuration.Tests
         {
             var services = new ServiceCollection();
             services.ConfigureLogging(_configuration)
-                .RegisterLoggerProvider(new MELConsoleLoggerProvider())
+                .RegisterLoggerProvider(new MelConsoleLoggerProvider())
                 .Build();
 
             var sp = services.BuildServiceProvider();

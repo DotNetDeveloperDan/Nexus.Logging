@@ -84,7 +84,7 @@ namespace Nexus.Logging.Serilog.Tests
             var message = InMemorySink.InMemorySink.Pop();
             Assert.That(
                 message,
-                Does.Contain("\"FooScope\":\"ProgLeasing.System.Logging.Serilog.Tests.FooScopeNoToString\"")
+                Does.Contain("\"FooScope\":\"Nexus.Logging.Serilog.Tests.FooScopeNoToString\"")
             );
         }
 

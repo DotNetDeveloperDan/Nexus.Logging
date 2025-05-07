@@ -42,7 +42,7 @@ namespace Nexus.Logging.Tests
             Assert.That(appScope, Is.Not.Null);
             Assert.That(
                 appScope.Options.ApplicationName,
-                Is.EqualTo("ProgLeasing.System.Logging"));
+                Is.EqualTo("Nexus.Logging"));
         }
 
         [Test]

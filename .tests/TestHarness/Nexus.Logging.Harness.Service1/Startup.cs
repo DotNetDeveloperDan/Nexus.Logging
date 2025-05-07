@@ -29,7 +29,7 @@ namespace Nexus.Logging.Harness.Service1
                 httpClient =>
                 {
                     httpClient.BaseAddress =
-                        new Uri("https://progleasing.system.logging.testharness.service2");
+                        new Uri("https://Nexus.logging.testharness.service2");
                 }) // When running this in a Linux Docker container the kestrel server cannot validate the certificate and fails. This circumvents the validation so calls still work.
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true }) //NOSONAR
                 .AddCorrelationHandler();
@@ -37,7 +37,7 @@ namespace Nexus.Logging.Harness.Service1
                     httpClient =>
                     {
                         httpClient.BaseAddress =
-                            new Uri("https://progleasing.system.logging.testharness.servicenocorrelator");
+                            new Uri("https://Nexus.logging.testharness.servicenocorrelator");
                     }) // When running this in a Linux Docker container the kestrel server cannot validate the certificate and fails. This circumvents the validation so calls still work.
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true }) //NOSONAR
                 .AddCorrelationHandler();

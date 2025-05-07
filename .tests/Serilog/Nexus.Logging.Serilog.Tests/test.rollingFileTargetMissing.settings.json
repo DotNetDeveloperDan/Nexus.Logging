@@ -1,5 +1,5 @@
 ﻿{
-  "ApplicationName": "ProgLeasing.System.Logging.Serilog.Tests",
+  "ApplicationName": "Nexus.Logging.Serilog.Tests",
   "AppSettings": {
     "Environment": "UnitTests"
   },
@@ -9,7 +9,7 @@
       "Microsoft": "Error",
       "System": "Error"
     },
-    "OutputTemplate": "$ProgJsonLogFormatter",
+    "OutputTemplate": "$NexusJsonLogFormatter",
     "Targets": [
       {
         "Provider": "Serilog",

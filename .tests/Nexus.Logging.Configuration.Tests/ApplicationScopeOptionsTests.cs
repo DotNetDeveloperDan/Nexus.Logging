@@ -15,7 +15,7 @@ namespace Nexus.Logging.Configuration.Tests
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<ApplicationScopeOptions>();
 
-            Assert.That(options.ApplicationName, Is.EqualTo("ProgLeasing.System.Logging.Configuration.Tests123"));
+            Assert.That(options.ApplicationName, Is.EqualTo("Nexus.Logging.Configuration.Tests123"));
             Assert.That(options.Environment, Is.EqualTo("UnitTests"));
         }
 
@@ -28,7 +28,7 @@ namespace Nexus.Logging.Configuration.Tests
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<ApplicationScopeOptions>();
 
-            Assert.That(options.ApplicationName, Is.EqualTo("ProgLeasing.System.Logging.Configuration.Tests"));
+            Assert.That(options.ApplicationName, Is.EqualTo("Nexus.Logging.Configuration.Tests"));
             Assert.That(options.Environment, Is.EqualTo("UnitTests"));
         }
 

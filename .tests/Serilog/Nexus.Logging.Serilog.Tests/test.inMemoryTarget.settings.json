@@ -1,5 +1,5 @@
 ﻿{
-  "ApplicationName": "ProgLeasing.System.Logging.Serilog.Tests",
+  "ApplicationName": "Nexus.Logging.Serilog.Tests",
   "AppSettings": {
     "Environment": "UnitTests"
   },
@@ -9,13 +9,13 @@
       "Microsoft": "Error",
       "System": "Error"
     },
-    "OutputTemplate": "$ProgJsonLogFormatter",
+    "OutputTemplate": "$NexusJsonLogFormatter",
     "Targets": [
       {
         "Provider": "Serilog",
         "Type": "Service",
         "Args": {
-          "Using": "ProgLeasing.System.Logging.Serilog.InMemorySink",
+          "Using": "Nexus.Logging.Serilog.InMemorySink",
           "Name": "InMemory"
         }
       }

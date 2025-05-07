@@ -16,7 +16,7 @@ namespace Nexus.Logging.Serilog.Tests
 {
     public class SerilogConfigureLoggerProviderTests
     {
-        [TestCase("$ProgJsonLogFormatter", typeof(NexusJsonLogFormatter))]
+        [TestCase("$NexusJsonLogFormatter", typeof(NexusJsonLogFormatter))]
         [TestCase("[{Timestamp}] {Message} {Exception}{NewLine}", typeof(MessageTemplateTextFormatter))]
         [TestCase("", typeof(NexusJsonLogFormatter))]
         [TestCase(null, typeof(NexusJsonLogFormatter))]

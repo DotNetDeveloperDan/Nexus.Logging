@@ -7,7 +7,7 @@ namespace Nexus.Logging.Configuration.Tests
     /// <summary>
     /// Test provider configuration
     /// </summary>
-    public class MELConsoleLoggerProvider : IConfigureLoggerProvider
+    public class MelConsoleLoggerProvider : IConfigureLoggerProvider
     {
         public string ProviderName => "Microsoft.Extensions.Logging";
 

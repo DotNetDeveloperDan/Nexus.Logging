@@ -16,7 +16,7 @@ namespace Nexus.Logging.Serilog.Tests
                 Type = LoggerTarget.Service,
                 Args = new Dictionary<string, string>
                 {
-                    { "Using", "ProgLeasing.System.Logging.Serilog.InMemorySink" },
+                    { "Using", "Nexus.Logging.Serilog.InMemorySink" },
                     { "Name",  "InMemory" }
                 }
             };
@@ -40,7 +40,7 @@ namespace Nexus.Logging.Serilog.Tests
                 Type = LoggerTarget.Service,
                 Args = new Dictionary<string, string>
                 {
-                    { "Using", "ProgLeasing.System.Logging.Serilog.InMemorySink" }
+                    { "Using", "Nexus.Logging.Serilog.InMemorySink" }
                 }
             };
             var loggerConfig = new LoggerConfiguration();
